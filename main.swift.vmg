@@ -1,0 +1,36 @@
+#set ($language="Swift")
+#set ($description="Swift Server")
+#set ($author="Evol Johnson")
+#set ($overwrite="true")
+#set ($price=0)
+#set ($enabled="true")
+#set ($filep="main.swift")
+#parse("common/utils.parse")
+#set ($filename="${outputDir}/${project.name}/Sources/${project.name}/${filep}")
+import KituraSys
+import KituraNet
+import KituraRouter
+
+import LoggerAPI
+import HeliumLogger
+
+${h}if os(Linux)
+    import Glibc
+${h}endif
+
+import Foundation
+
+${h}if os(OSX)
+    import Mustache
+${h}endif
+
+
+${application.name}Router.sharedInstance.setupRoutes();
+ 
+${h}if os(OSX) // Mustache implemented for OSX only yet
+
+${h}endif
+
+let server = HttpServer.listen(Config.sharedInstance.serverPort,delegate: ${application.name}Router.sharedInstance)
+print("Server up and running on http://localhost:\(Config.sharedInstance.serverPort)/api/")
+Server.run()

@@ -1,0 +1,12 @@
+#set ($language="Swift")
+#set ($description="Configuration")
+#set ($author="Evol Johnson")
+#set ($overwrite="true")
+#set ($enabled="true")
+#set ($price=0)
+#set ($filep="Config.swift")
+#set ($filename="${outputDir}/${project.name}/Sources/${project.name}/${filep}")
+class Config {
+	static let sharedInstance = Config()
+	let serverPort = 9000
+}

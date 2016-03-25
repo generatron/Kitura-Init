@@ -1,0 +1,34 @@
+#set ($language="Text")
+#set ($description="Basic Model")
+#set ($author="Evol Johnson")
+#set ($overwrite="false")
+#set ($enabled="true")
+#set ($header="false")
+#set ($price=0)
+#set ($filep="model.yaml")
+#set ($filename="${outputDir}/${project.name}/${filep}")
+name: ${project.name}
+description: Your ${project.name} description here
+model:
+ packageName : com.generatron.${project.name.toLowerCase()}
+ entities :
+  - name : TodoItem
+    attributes:
+     - name : id
+       type : Integer
+       primaryKey : true
+     - name : order
+       type : Integer
+     - name : title
+       type : String
+     - name : completed
+       type : Bool
+  - name : Task
+    attributes:
+     - name : id
+       type : Integer
+       primaryKey : true
+     - name : title
+       type : String
+     - name : completed
+       type : Bool       

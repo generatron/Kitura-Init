@@ -1,0 +1,55 @@
+#set ($language="Swift")
+#set ($description="Router Configuration")
+#set ($author="Evol Johnson")
+#set ($overwrite="true")
+#set ($price=0)
+#set ($enabled="true")
+#set ($filep="${application.name}Router.swift")
+#set ($filename="${outputDir}/${project.name}/Sources/${project.name}/Controllers/${filep}")
+import KituraRouter
+import KituraNet
+import LoggerAPI
+import SwiftyJSON
+import Foundation
+import Mustache
+/**
+* RouterMiddleware can be used for intercepting requests and handling custom behavior
+* such as authentication and other routing
+*/
+class ${application.name}Router  : Router {
+    static let sharedInstance = ${application.name}Router()    
+    func setupRoutes() { 
+		self.get("/") { _, response, next in
+		    defer {
+		        next()
+		    }
+		    do {
+		        var context: [String: Any] = [
+		            "name": "Arthur",
+		            "date": NSDate(),
+		            "realDate": NSDate().dateByAddingTimeInterval(60*60*24*3),
+		            "late": true
+		        ]
+		
+		        // Let template format dates with `{{format(...)}}`
+		        let dateFormatter = NSDateFormatter()
+		        dateFormatter.dateStyle = .MediumStyle
+		        context["format"] = dateFormatter
+		
+		        try response.render("index", context: context).end()
+		    } catch {
+		        Log.error("Failed to render template \(error)")
+		    }
+		}
+
+		// Handles any errors that get set
+		self.error { request, response, next in
+		  response.setHeader("Content-Type", value: "text/plain; charset=utf-8")
+		    do {
+		        try response.send("Caught the error: \(response.error!.localizedDescription)").end()
+		    }
+		    catch {}
+		  next()
+		}
+    }
+}

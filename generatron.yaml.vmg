@@ -1,0 +1,25 @@
+#set ($language="Text")
+#set ($description="Generatron configuration")
+#set ($author="Evol Johnson")
+#set ($overwrite="true")
+#set ($enabled="true")
+#set ($header="false")
+#set ($price=0)
+#set ($filep="generatron.yaml")
+#set ($filename="${outputDir}/${project.name}/${filep}")
+#parse("common/utils.parse")
+${h} change URLs below to point to repo you want to commit Generatron output. Github's generatronServer should have write permissions
+${h} Github example provided, should work with other repos e.g. Bitbucket
+git:
+ - bundleName : "Kitura(.)*"
+   gitUrl : "${targetRepo}"
+   subdir : "KituraBackend"
+   branch : "Generatron"
+ - bundleName : "Perfect(.)*"
+   gitUrl : "${targetRepo}"
+   subdir : "PerfectBackend"
+   branch : "Generatron"
+ - bundleName : "ionic(.)*"
+   gitUrl : "${targetRepo}"
+   subdir : "IonicFrontend"
+   branch : "Generatron"
