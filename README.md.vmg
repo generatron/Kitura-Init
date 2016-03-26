@@ -8,7 +8,12 @@
 #set ($filep="README.md")
 #set ($filename="${outputDir}/${project.name}/${filep}")
 #parse("common/utils.parse")
-${h} Kitura ${project.name} Backend
+![Generatron](https://www.generatron.com/logosmall.png)
+
+Engineered with [${bundle.name}](https://www.generatron.com//#/generatron/${bundle.name})
+
+${h}${project.name}
+
 1. Build ${project.name} application
 
   1. Mac OS X: 
@@ -34,9 +39,13 @@ ${h}${h}Tests
 
 ${h} Generatron
 You can modify the model.yaml and the generatron.yaml files to fit your needs and use other generators.
+
 1) Place the code you received in a git repo, (generatronServer needs write permissions to the repos you outputting to)
+
 2) `gtron harvest <git url to the repo> ${project.name}`
-3) `gtron specs`
-4) `gtron usespec ${project.name}` [this is optional]
-5) `gtron devs` [this is optional]
-6) `gtron generate using <developerName>`
+
+3) `gtron models`
+
+4) `gtron devs` [this is optional]
+
+5) `gtron generate <modelName> using <developerName>`
